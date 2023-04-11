@@ -74,39 +74,43 @@
 </div>
 <div class="container my-3">
     <div class="row">
-        <div class="col-md-8 col-lg-9">
+        <div class="col-md-8 col-lg-9" id="main-area">
             <h1>Blog</h1>
 
             <div class="col-lg-8">
-                {% for p in post_list %}
-                    {#                <h2><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></h2>#}
-                    {#                <h4> {{ p.create_at }}</h4>#}
-                    {#                <p> {{ p.content }}</p>#}
+                {% if post_list.exists %}
+                    {% for p in post_list %}
+                        {#                <h2><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></h2>#}
+                        {#                <h4> {{ p.create_at }}</h4>#}
+                        {#                <p> {{ p.content }}</p>#}
 
-                    <!-- Featured blog post-->
-                    <div class="card mb-4">
-                    {% if p.head_image %}
-                        <img class="card-img-top" src="{{ p.head_image.url }}"
-                             alt="{{ p }} head image"/>
-                        {% else %}
-                        <img class="card-img-top" src="https://picsum.photos/seed/{{ p.id }}/800/400"
-                             alt="random_images"/>
-                    {% endif %}
-                        <div class="card-body">
-                            {#                        <div class="small text-muted">January 1, 2023</div>#}
-                            <h2 class="card-title">{{ p.title }}</h2>
-                            {% if p.hook_text %}
-                                <h5 class="text-muted">{{ p.hook_text }}</h5>
+                        <!-- Featured blog post-->
+                        <div class="card mb-4">
+                            {% if p.head_image %}
+                                <img class="card-img-top" src="{{ p.head_image.url }}"
+                                     alt="{{ p }} head image"/>
+                            {% else %}
+                                <img class="card-img-top" src="https://picsum.photos/seed/{{ p.id }}/800/400"
+                                     alt="random_images"/>
                             {% endif %}
-                            <p class="card-text">{{ p.content | truncatewords:45 }}</p>
-                            <a class="btn btn-primary" href="{{ p.get_absolute_url }}">Read more →</a>
+                            <div class="card-body">
+                                {#                        <div class="small text-muted">January 1, 2023</div>#}
+                                <h2 class="card-title">{{ p.title }}</h2>
+                                {% if p.hook_text %}
+                                    <h5 class="text-muted">{{ p.hook_text }}</h5>
+                                {% endif %}
+                                <p class="card-text">{{ p.content | truncatewords:45 }}</p>
+                                <a class="btn btn-primary" href="{{ p.get_absolute_url }}">Read more →</a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                Posted on {{ p.create_at }} by
+                                <a href="#">개발 예정</a>
+                            </div>
                         </div>
-                        <div class="card-footer text-muted">
-                            Posted on {{ p.create_at }} by
-                            <a href="#">개발 예정</a>
-                        </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                {% else %}
+                    <h3>아직 게시물이 없습니다.</h3>
+                {% endif %}
                 <!-- Nested row for non-featured blog posts-->
                 {#                <div class="row">#}
                 {#                    <div class="col-lg-6">#}
