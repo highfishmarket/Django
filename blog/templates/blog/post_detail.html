@@ -34,6 +34,7 @@
                         <header class="mb-4">
                             <!-- Post title-->
                             <h1 class="fw-bolder mb-1">{{ post.title }}</h1>
+                            <h5 class="text-muted">{{ post.hook_text }}</h5>
                             <p class="lead">
                                 by
                                 <a href="">개발예정</a>
@@ -54,7 +55,7 @@
                         </figure>
                         <hr>
                         <!-- Post content-->
-                        <p>{{ post.content | truncatewords:45 }}</p>
+                        <p>{{ post.content }}</p>
                     {% if post.file_upload %}
                         <a href="{{ post.file_upload.url }}" class="btn btn-outline-dark" role="button" download="">Download : {{ post.get_file_name }}</a>
                     {% endif %}
